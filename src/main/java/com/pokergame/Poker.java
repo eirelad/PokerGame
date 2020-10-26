@@ -2,6 +2,7 @@ package com.pokergame;
 
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +13,6 @@ import java.util.stream.Stream;
 public class Poker {
 
     private static TreeMap<String, Integer> playerScoreBoardMap = new TreeMap<>();
-
-    private final static String STR_PATH = "/Users/chris/IdeaProjects/PokerGame/src/main/resources/poker-hands.txt";
 
     private final static String PLAYER_1 = "Player 1";
     private final static String PLAYER_2 = "Player 2";
@@ -33,7 +32,8 @@ public class Poker {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        Path path = Paths.get(STR_PATH);
+        URI resource = ClassLoader.getSystemResource("poker-hands.txt").toURI();
+        Path path = Paths.get(resource);
         try (Stream<String> lines = Files.lines(path)) {
             lines.forEach(line -> {
 
